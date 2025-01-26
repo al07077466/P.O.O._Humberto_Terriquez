@@ -22,16 +22,12 @@ public class CLI {
         }
     }
 
+    /* */
     public static void showMenu() {
         System.out.println("Menu" + 
         "\n 1. Agregar Carro al Catalogo" + 
         "\n 2. Mostrar Catalogo" + 
         "\n 3. Salir");
-
-        //System.out.println("Menu");
-        //System.out.println("1. Agregar Carro al Catalogo");
-        //System.out.println("2. Mostrar Catalogo");
-        //System.out.println("3. Salir");
     }
 
     public void mostrarMensaje(String mensaje) {
