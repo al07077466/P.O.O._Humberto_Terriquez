@@ -1,5 +1,9 @@
 package edu.humberto.terriquez.actividades.actividad2.models;
 
+/**
+ * La clase Number, utiliza un bucle for para generar todos los numerospares del 1 al 100
+ * en un arreglo llamado numerosPares el cual solo tiene espacio para 50 elementos.
+ */
 public class Number {
     public static int[] generarNumerosPares() {
         int[] numerosPares = new int[50];

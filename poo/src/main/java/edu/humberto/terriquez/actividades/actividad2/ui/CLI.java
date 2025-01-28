@@ -4,7 +4,17 @@ import java.util.Scanner;
 import edu.humberto.terriquez.actividades.actividad2.process.NameValidator;
 import edu.humberto.terriquez.actividades.actividad2.models.Number;
 
+/**
+ * La clase CLI (Command Line Interface) es la clase encargada de hacer un display
+ * del menu para interactuar con el usuario, el cual utiliza los metodos runApp
+ * para ejecutar el menu, mostrarNumeros para hacer el display de los numeros par
+ * y showMenu que solo muestra las opciones del menu.
+ */
 public class CLI {
+    /**
+     * Este es el metodo runApp que utiliza un bucle while junto con un switch-case,
+     * el cual muestra y le la opcion elegida del usuario.
+     */
     public static void runApp() {
         Scanner scanner = new Scanner(System.in);
         int[] numerosPares = Number.generarNumerosPares();
@@ -41,6 +51,10 @@ public class CLI {
 
     }
 
+    /**
+     * mostrarNumeros es el metodo encargado de imprimir
+     * los numeros par, tabulando 10 numeros por fila
+     */
     public static void mostrarNumeros(int[] numeros) {
         for (int i=0; i< numeros.length; i++){ 
             System.out.printf("%6d",numeros[i]);
@@ -50,6 +64,9 @@ public class CLI {
         }
     }
     
+    /**
+     * Metodo showMenu que imprime el menú de opciones en la consola.
+     */
     public static void showMenu(){
         System.out.println("Menu");
         System.out.println("1. Validar Nombres");
