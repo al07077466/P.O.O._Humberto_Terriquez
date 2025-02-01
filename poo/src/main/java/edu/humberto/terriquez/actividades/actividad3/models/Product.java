@@ -1,5 +1,9 @@
 package edu.humberto.terriquez.actividades.actividad3.models;
 
+/**
+ * Product es la clase encargada de definir los atributos y comportamientos de los productos de una tienda.
+ * Contiene los atributos name, description, code, type, price y tax, incluyendo sus setters y sus getters.
+ */
 public class Product {
     private String name;
     private String description;
@@ -8,6 +12,15 @@ public class Product {
     private double price;
     private double tax;
 
+    /**
+     * Constructor encargado de inicializar un producto. Recibiendo:
+     * @param name
+     * @param description
+     * @param code
+     * @param type
+     * @param price
+     * @param tax
+     */
     public Product(String name, String description, String code, String type, double price, double tax) {
         setName(name);
         setDescription(description);
@@ -17,6 +30,9 @@ public class Product {
         setTax(tax);
     }
 
+    /**
+     * Getters.
+     */
     public String getName() { return name; }
     public String getDescription() { return description; }
     public String getCode() { return code; }
@@ -24,6 +40,9 @@ public class Product {
     public double getPrice() { return price; }
     public double getTax() { return tax; }
 
+    /**
+     * Setters con sus validaciones de exepciones.
+     */
     public void setName(String name) {
         if (name.matches(".*\\d.*") && name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede contener números o estar vacio.");

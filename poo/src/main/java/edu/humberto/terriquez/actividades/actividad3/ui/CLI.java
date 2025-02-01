@@ -6,15 +6,24 @@ import edu.humberto.terriquez.actividades.actividad3.process.ProductStockManager
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Command Line Interface para el manejo del menu que interactua con el usuario.
+ */
 public class CLI {
     private Scanner scanner;
     private ProductStockManager stockManager;
 
+    /**
+     * Constructor encargado de inicializar el scanner & stock manager.
+     */
     public CLI() {
         scanner = new Scanner(System.in);
         stockManager = new ProductStockManager();
     }
 
+    /**
+     * Metodo encargado de correr el programa, mostrando el menu, manejando y leyendo la interaccion con el usuario.
+     */
     public void runApp() {
         while (true) {
             showMenu();
@@ -42,6 +51,9 @@ public class CLI {
         }
     }
 
+    /**
+     * Metodo encargado de imprimir el menu principal de opciones.
+     */
     private void showMenu() {
         System.out.println("\nMenú Principal:");
         System.out.println("1. Mostrar Stock");
@@ -52,6 +64,9 @@ public class CLI {
         System.out.print("Selecciona una opción: ");
     }
 
+    /**
+     * Metodo que imprime los productos encontrados en la lista.
+     */
     private void displayProductList() {
         List<Product> stock = stockManager.getStock();
         if (stock.isEmpty()) {
@@ -65,6 +80,9 @@ public class CLI {
         }
     }
 
+    /**
+     * Anade un nuevo producto al stock, leyendo los inputs del usuario.
+     */
     private void addProduct() {
         try {
             System.out.print("Nombre del producto: ");
@@ -85,6 +103,9 @@ public class CLI {
         }
     }
 
+    /**
+     * Compara los precios de 2 producto basado en los nombres inputeados por el usuario.
+     */
     private void compareProducts() {
         try {
             System.out.print("Ingresa el nombre del primer producto: ");
@@ -107,6 +128,9 @@ public class CLI {
         }
     }
 
+    /**
+     * calculateRecommendedPrice maneja la interaccion con el usuario para calcular el precio recomendado para un producto basado en el costo y profit margin.
+     */
     private void calculateRecommendedPrice() {
         try {
             System.out.print("Ingresa el precio del producto: ");
@@ -114,7 +138,6 @@ public class CLI {
             System.out.print("Ingresa el porcentaje de utilidad deseado: ");
             double profitMargin = Double.parseDouble(scanner.nextLine());
     
-            // Calculate the recommended price with a 16% tax rate
             double finalPrice = PriceCalculator.calculateRecommendedPrice(price, profitMargin, 16);
             System.out.println("El precio final recomendado es: " + finalPrice);
         } catch (Exception e) {
