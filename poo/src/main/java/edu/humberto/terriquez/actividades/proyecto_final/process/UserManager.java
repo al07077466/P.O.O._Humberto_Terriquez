@@ -16,8 +16,8 @@ public class UserManager {
         users.add(user);
     }
 
-    public boolean validateCredentials(String id, String password) {
-        User user = getUserById(id);
+    public boolean validateCredentials(String name, String password) {
+        User user = getUserByName(name);
         return user != null && user.getPassword().equals(password);
     }
 
@@ -33,7 +33,16 @@ public class UserManager {
 
     public User getUserById(String id) {
         for (User user : users) {
-            if (user.getId().equals(id)) {
+            if (user.getName().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByName(String name) {
+        for (User user : users) {
+            if (user.getName().equals(name)) {
                 return user;
             }
         }

@@ -50,9 +50,9 @@ public class CLI {
     private void userMenu(String userId) {
         while (true) {
             System.out.println("Menú principal");
-            System.out.println("Bienvenido " + userManager.getUserName(userId) + "!");
+            System.out.println("Bienvenido, " + userManager.getUserName(userId) + "!");
             System.out.println("1 - Registros");
-            System.out.println("2 - Consultas");
+            System.out.println("2 - Consultar Libros");
             System.out.println("3 - Salir");
             System.out.print("Elige una opción: ");
             int option = Integer.parseInt(scanner.nextLine());
@@ -68,21 +68,26 @@ public class CLI {
                         case 1:
                             System.out.print("Ingresa el nombre del libro: ");
                             String bookNameBorrow = scanner.nextLine();
-                            if (loanManager.canUserBorrow(userId)) {
-                                loanManager.requestLoan(userId, bookNameBorrow);
-                                System.out.println("Préstamo registrado exitosamente.");
-                            } else {
-                                System.out.println("No puedes pedir más libros.");
+                    
+                            if (!loanManager.bookExists(bookNameBorrow)) {
+                                System.out.println("Error: El libro no existe");
+                                break;
                             }
+                            if (!loanManager.isBookAvailable(bookNameBorrow)) {
+                                System.out.println("Error: No hay ejemplares disponibles");
+                                break;
+                            }
+                            if (!loanManager.canUserBorrow(userId)) {
+                                System.out.println("Error: Límite de préstamos alcanzado (máx. 2)");
+                                break;
+                            }
+                    
+                            loanManager.requestLoan(userId, bookNameBorrow);
+                            System.out.println("Solicitud enviada al bibliotecario.");
                             break;
                         case 2:
-                            System.out.print("Ingresa el nombre del libro: ");
-                            String bookNameReturn = scanner.nextLine();
-                            loanManager.returnLoan(userId, bookNameReturn);
-                            System.out.println("Libro devuelto exitosamente.");
+                            System.out.println("Acude con el bibliotecario para registrar el regreso del libro.");
                             break;
-                        default:
-                            System.out.println("Opción inválida.");
                     }
                     break;
                 case 2:
@@ -100,7 +105,7 @@ public class CLI {
                     }
                     break;
                 case 3:
-                    return;  // Sale del menú usuario
+                    return;
                 default:
                     System.out.println("Opción inválida.");
             }
@@ -147,10 +152,28 @@ public class CLI {
                     break;
                 case 3:
                     System.out.print("ID del usuario: ");
-                    String userId = scanner.nextLine();
+                    String userIdLoan = scanner.nextLine();
                     System.out.print("Nombre del libro: ");
                     String bookNameLoan = scanner.nextLine();
-                    loanManager.requestLoan(userId, bookNameLoan);
+                
+                    if (!loanManager.userExists(userIdLoan)) {
+                        System.out.println("Error: Usuario no registrado");
+                        break;
+                    }
+                    if (!loanManager.bookExists(bookNameLoan)) {
+                        System.out.println("Error: Libro no registrado");
+                        break;
+                    }
+                    if (!loanManager.isBookAvailable(bookNameLoan)) {
+                        System.out.println("Error: No hay ejemplares disponibles");
+                        break;
+                    }
+                    if (!loanManager.canUserBorrow(userIdLoan)) {
+                        System.out.println("Error: Usuario tiene máximo de préstamos");
+                        break;
+                    }
+                
+                    loanManager.requestLoan(userIdLoan, bookNameLoan);
                     System.out.println("Préstamo registrado exitosamente.");
                     break;
                 case 4:
@@ -158,8 +181,22 @@ public class CLI {
                     String userIdReturn = scanner.nextLine();
                     System.out.print("Nombre del libro: ");
                     String bookNameReturn = scanner.nextLine();
+                
+                    if (!loanManager.userExists(userIdReturn)) {
+                        System.out.println("Error: Usuario no registrado");
+                        break;
+                    }
+                    if (!loanManager.bookExists(bookNameReturn)) {
+                        System.out.println("Error: Libro no registrado");
+                        break;
+                    }
+                    if (!loanManager.loanExists(userIdReturn, bookNameReturn)) {
+                        System.out.println("Error: Este usuario no tiene prestado este libro");
+                        break;
+                    }
+                
                     loanManager.returnLoan(userIdReturn, bookNameReturn);
-                    System.out.println("Préstamo devuelto exitosamente.");
+                    System.out.println("Retorno registrado exitosamente.");
                     break;
                 case 5:
                     System.out.println("1 - Ver solicitudes de préstamo");
@@ -186,7 +223,7 @@ public class CLI {
                     }
                     break;
                 case 6:
-                    return;  // Sale del menú bibliotecario
+                    return;
                 default:
                     System.out.println("Opción inválida.");
             }

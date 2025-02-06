@@ -28,31 +28,50 @@ public class LoanManager {
     }
 
     public void requestLoan(String userId, String bookName) {
-        if (canUserBorrow(userId) && isBookAvailable(bookName)) {
+        User user = userManager.getUserById(userId);
+        Book book = bookManager.getBookByName(bookName);
+        
+        if (user != null && book != null) {
             loans.add(new Loan(userId, bookName));
-            User user = userManager.getUserById(userId);
-            Book book = bookManager.getBookByName(bookName);
             user.setActiveLoan(user.getActiveLoan() + 1);
             book.setStock(book.getStock() - 1);
         }
     }
 
     public void returnLoan(String userId, String bookName) {
-        Loan loanToRemove = null;
+    Loan loanToRemove = null;
+    for (Loan loan : loans) {
+        if (loan.getUserId().equals(userId) && loan.getBookName().equals(bookName)) {
+            loanToRemove = loan;
+            break;
+        }
+    }
+    
+    if (loanToRemove != null) {
+        loans.remove(loanToRemove);
+        User user = userManager.getUserById(userId);
+        Book book = bookManager.getBookByName(bookName);
+        
+        if (user != null) user.setActiveLoan(user.getActiveLoan() - 1);
+        if (book != null) book.setStock(book.getStock() + 1);
+    }
+}
+
+    public boolean bookExists(String bookName) {
+        return bookManager.getBookByName(bookName) != null;
+    }
+
+    public boolean userExists(String userId) {
+        return userManager.getUserById(userId) != null;
+    }
+
+    public boolean loanExists(String userId, String bookName) {
         for (Loan loan : loans) {
             if (loan.getUserId().equals(userId) && loan.getBookName().equals(bookName)) {
-                loanToRemove = loan;
-                break;
+                return true;
             }
         }
-
-        if (loanToRemove != null) {
-            loans.remove(loanToRemove);
-            User user = userManager.getUserById(userId);
-            Book book = bookManager.getBookByName(bookName);
-            user.setActiveLoan(user.getActiveLoan() - 1);
-            book.setStock(book.getStock() + 1);
-        }
+        return false;
     }
 
     public List<Loan> getLoans() {
