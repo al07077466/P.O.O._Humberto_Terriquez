@@ -4,6 +4,9 @@ import edu.humberto.terriquez.actividades.proyecto_final.models.Loan;
 import edu.humberto.terriquez.actividades.proyecto_final.process.UserManager;
 import edu.humberto.terriquez.actividades.proyecto_final.process.BookManager;
 import edu.humberto.terriquez.actividades.proyecto_final.process.LoanManager;
+import edu.humberto.terriquez.actividades.proyecto_final.ui.Languages.Lang;
+import edu.humberto.terriquez.actividades.proyecto_final.ui.Languages.Esp;
+import edu.humberto.terriquez.actividades.proyecto_final.ui.Languages.Eng;
 import java.util.Scanner;
 
 public class CLI {
@@ -11,6 +14,7 @@ public class CLI {
     private BookManager bookManager;
     private LoanManager loanManager;
     private Scanner scanner;
+    private Lang lang;
 
     public CLI() {
         this.userManager = new UserManager();
@@ -24,69 +28,83 @@ public class CLI {
     }
 
     public void runApp() {
+        System.out.println("Select a Language:");
+        System.out.println("1 - Español");
+        System.out.println("2 - English");
+        System.out.print("Choose an option: ");
+        int languageOption = Integer.parseInt(scanner.nextLine());
+
+        if (languageOption == 1) {
+            lang = new Esp();
+        } else if (languageOption == 2) {
+            lang = new Eng();
+        } else {
+            System.out.println("Invalid option. Defaulting to Español.");
+            lang = new Esp();
+        }
+        
         while (true) {
-            System.out.println("Bienvenido a la biblioteca TeamTree!");
-            System.out.println("Haz Log-in para ingresar.");
-            System.out.print("Usuario: ");
+            System.out.println(lang.getFirstWelcomeText());
+            System.out.println(lang.getLogInRequestText());
+            System.out.print(lang.getUserRequestText());
             String userId = scanner.nextLine();
-            System.out.print("Ingresa tu contraseña: ");
+            System.out.print(lang.getPasswordRequestText());
             String password = scanner.nextLine();
 
             if (userManager.validateCredentials(userId, password)) {
                 String userType = userManager.getUserType(userId);
-                String userName = userManager.getUserName(userId);
 
                 if (userType.equals("user")) {
                     userMenu(userId);
                 } else if (userType.equals("librarian")) {
-                    librarianMenu();
+                    librarianMenu(userId);
                 }
             } else {
-                System.out.println("Usuario o contraseña incorrectos.");
+                System.out.println(lang.getLogInErrorText());
             }
         }
     }
 
     private void userMenu(String userId) {
         while (true) {
-            System.out.println("Menú principal");
-            System.out.println("Bienvenido, " + userManager.getUserName(userId) + "!");
-            System.out.println("1 - Registros");
-            System.out.println("2 - Consultar Libros");
-            System.out.println("3 - Salir");
-            System.out.print("Elige una opción: ");
+            System.out.println(lang.getMainMenuText());
+            System.out.println(lang.getWelcomeText() + userManager.getUserName(userId) + lang.getExclamationMarkText());
+            System.out.println(lang.getOptionOneRegistryText());
+            System.out.println(lang.getOptionTwoConsultText());
+            System.out.println(lang.getOptionThreeExit());
+            System.out.print(lang.getChooseAnOptionText());
             int option = Integer.parseInt(scanner.nextLine());
     
             switch (option) {
                 case 1:
-                    System.out.println("1 - Pedir prestado un libro");
-                    System.out.println("2 - Regresar un libro");
-                    System.out.print("Elige una opción: ");
+                    System.out.println(lang.getOptionOneRequestBookText());
+                    System.out.println(lang.getOptionTwoReturnBookText());
+                    System.out.print(lang.getChooseAnOptionText());
                     int subOption = Integer.parseInt(scanner.nextLine());
                     
                     switch (subOption) {
                         case 1:
-                            System.out.print("Ingresa el nombre del libro: ");
+                            System.out.print(lang.getEnterBookNameText());
                             String bookNameBorrow = scanner.nextLine();
                     
                             if (!loanManager.bookExists(bookNameBorrow)) {
-                                System.out.println("Error: El libro no existe");
+                                System.out.println(lang.getBookDontExistErrorText());
                                 break;
                             }
                             if (!loanManager.isBookAvailable(bookNameBorrow)) {
-                                System.out.println("Error: No hay ejemplares disponibles");
+                                System.out.println(lang.getNotEnoughStockErrorText());
                                 break;
                             }
                             if (!loanManager.canUserBorrow(userId)) {
-                                System.out.println("Error: Límite de préstamos alcanzado (máx. 2)");
+                                System.out.println(lang.getMaxLoansReachedErrorText());
                                 break;
                             }
                     
                             loanManager.requestLoan(userId, bookNameBorrow);
-                            System.out.println("Solicitud enviada al bibliotecario.");
+                            System.out.println(lang.getBookLoanRequestedText());
                             break;
                         case 2:
-                            System.out.println("Acude con el bibliotecario para registrar el regreso del libro.");
+                            System.out.println(lang.getReachLibrarianForRequestText());
                             break;
                     }
                     break;
@@ -94,121 +112,121 @@ public class CLI {
                     for (String bookInfo : bookManager.getBooksInfo()) {
                         System.out.println(bookInfo);
                     }
-                    System.out.print("Escribe el nombre del libro o 'back' para regresar: ");
+                    System.out.print(lang.getEnterBookNameText());
                     String bookName = scanner.nextLine();
                     if (!bookName.equals("back")) {
                         if (bookManager.getBookByName(bookName) != null) {
-                            System.out.println("Libro encontrado.");
+                            System.out.println(lang.getBookFoundText());
                         } else {
-                            System.out.println("Libro no encontrado.");
+                            System.out.println(lang.getBookNotFoundErrorText());
                         }
                     }
                     break;
                 case 3:
                     return;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println(lang.getInvalidOptionErrorText());
             }
         }
     }
 
-    private void librarianMenu() {
+    private void librarianMenu(String userId) {
         while (true) {
-            System.out.println("Menú principal");
-            System.out.println("Bienvenido " + userManager.getUserName("00000000") + "!");
-            System.out.println("1 - Registrar Libros");
-            System.out.println("2 - Registrar Usuarios");
-            System.out.println("3 - Registrar Préstamo");
-            System.out.println("4 - Regresar Préstamo");
-            System.out.println("5 - Consultas");
-            System.out.println("6 - Salir");
-            System.out.print("Elige una opción: ");
+            System.out.println(lang.getMainMenuText());
+            System.out.println(lang.getWelcomeText() + userManager.getUserName(userId) + lang.getExclamationMarkText());
+            System.out.println(lang.getOptionOneRegisterBookText());
+            System.out.println(lang.getOptionTwoRegisterUserText());
+            System.out.println(lang.getOptionThreeRegisterLoanText());
+            System.out.println(lang.getOptionFourReturnBookText());
+            System.out.println(lang.getOptionFiveQueriesText());
+            System.out.println(lang.getOptionSixExitText());
+            System.out.print(lang.getChooseAnOptionText());
             int option = Integer.parseInt(scanner.nextLine());
     
             switch (option) {
                 case 1:
-                    System.out.print("Nombre del libro: ");
+                    System.out.print(lang.getEnterBookNameText());
                     String name = scanner.nextLine();
-                    System.out.print("Género: ");
+                    System.out.print(lang.getEnterBookGenreText());
                     String genre = scanner.nextLine();
-                    System.out.print("Autor: ");
+                    System.out.print(lang.getEnterBookAuthorText());
                     String author = scanner.nextLine();
-                    System.out.print("Stock: ");
+                    System.out.print(lang.getEnterBookStockText());
                     int stock = Integer.parseInt(scanner.nextLine());
                     bookManager.registerBook(name, genre, author, stock);
-                    System.out.println("Libro registrado exitosamente.");
+                    System.out.println(lang.getBoodAddedSuccessText());
                     break;
                 case 2:
-                    System.out.print("ID del usuario: ");
+                    System.out.print(lang.getEnterUserIDText());
                     String id = scanner.nextLine();
-                    System.out.print("Contraseña: ");
+                    System.out.print(lang.getEnterUserPasswordText());
                     String password = scanner.nextLine();
-                    System.out.print("Nombre: ");
+                    System.out.print(lang.getEnterUserNameText());
                     String userName = scanner.nextLine();
-                    System.out.print("Edad: ");
+                    System.out.print(lang.getEnterUserAgeText());
                     int age = Integer.parseInt(scanner.nextLine());
                     userManager.registerUser(id, password, userName, age, "user");
-                    System.out.println("Usuario registrado exitosamente.");
+                    System.out.println(lang.getUserRegisteredSuccessText());
                     break;
                 case 3:
-                    System.out.print("ID del usuario: ");
+                    System.out.print(lang.getEnterUserIDText());
                     String userIdLoan = scanner.nextLine();
-                    System.out.print("Nombre del libro: ");
+                    System.out.print(lang.getEnterBookNameText());
                     String bookNameLoan = scanner.nextLine();
                 
                     if (!loanManager.userExists(userIdLoan)) {
-                        System.out.println("Error: Usuario no registrado");
+                        System.out.println(lang.getUserNotFoundErrorText());
                         break;
                     }
                     if (!loanManager.bookExists(bookNameLoan)) {
-                        System.out.println("Error: Libro no registrado");
+                        System.out.println(lang.getBookNotRegisteredErrorText());
                         break;
                     }
                     if (!loanManager.isBookAvailable(bookNameLoan)) {
-                        System.out.println("Error: No hay ejemplares disponibles");
+                        System.out.println(lang.getNoStockLeftErrorText());
                         break;
                     }
                     if (!loanManager.canUserBorrow(userIdLoan)) {
-                        System.out.println("Error: Usuario tiene máximo de préstamos");
+                        System.out.println(lang.getMaxLoansReachedErrorText());
                         break;
                     }
                 
                     loanManager.requestLoan(userIdLoan, bookNameLoan);
-                    System.out.println("Préstamo registrado exitosamente.");
+                    System.out.println(lang.getLoanRegisteredSucessText());
                     break;
                 case 4:
-                    System.out.print("ID del usuario: ");
+                    System.out.print(lang.getEnterUserIDText());
                     String userIdReturn = scanner.nextLine();
-                    System.out.print("Nombre del libro: ");
+                    System.out.print(lang.getEnterBookNameText());
                     String bookNameReturn = scanner.nextLine();
                 
                     if (!loanManager.userExists(userIdReturn)) {
-                        System.out.println("Error: Usuario no registrado");
+                        System.out.println(lang.getUserNotFoundErrorText());
                         break;
                     }
                     if (!loanManager.bookExists(bookNameReturn)) {
-                        System.out.println("Error: Libro no registrado");
+                        System.out.println(lang.getBookNotRegisteredErrorText());
                         break;
                     }
                     if (!loanManager.loanExists(userIdReturn, bookNameReturn)) {
-                        System.out.println("Error: Este usuario no tiene prestado este libro");
+                        System.out.println(lang.getUserDoesntHaveThisBookErrorText());
                         break;
                     }
                 
                     loanManager.returnLoan(userIdReturn, bookNameReturn);
-                    System.out.println("Retorno registrado exitosamente.");
+                    System.out.println(lang.getBookReturnRegisteredSuccessText());
                     break;
                 case 5:
-                    System.out.println("1 - Ver solicitudes de préstamo");
-                    System.out.println("2 - Consultar libros");
-                    System.out.println("3 - Regresar al menú principal");
-                    System.out.print("Elige una opción: ");
+                    System.out.println(lang.getOptionOneViewLoanRequestsText());
+                    System.out.println(lang.getOptionTwoConsultText());
+                    System.out.println(lang.getOptionThreeReturnToMainMenuText());
+                    System.out.print(lang.getChooseAnOptionText());
                     int subOption = Integer.parseInt(scanner.nextLine());
                     
                     switch (subOption) {
                         case 1:
                             for (Loan loan : loanManager.getLoans()) {
-                                System.out.println("Usuario: " + loan.getUserId() + " - Libro: " + loan.getBookName());
+                                System.out.println(lang.getUserEqualsText() + loan.getUserId() + lang.getBookEqualsText() + loan.getBookName());
                             }
                             break;
                         case 2:
@@ -219,13 +237,13 @@ public class CLI {
                         case 3:
                             break;
                         default:
-                            System.out.println("Opción inválida.");
+                            System.out.println(lang.getInvalidOptionErrorText());
                     }
                     break;
                 case 6:
                     return;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println(lang.getInvalidOptionErrorText());
             }
         }
     }
