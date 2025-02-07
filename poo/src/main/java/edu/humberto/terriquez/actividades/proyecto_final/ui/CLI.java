@@ -9,6 +9,10 @@ import edu.humberto.terriquez.actividades.proyecto_final.ui.Languages.Esp;
 import edu.humberto.terriquez.actividades.proyecto_final.ui.Languages.Eng;
 import java.util.Scanner;
 
+/**
+ * CLI, como su nombre lo indica, es la clase encargada de manejar la interaccion con el usuario atraves del command line.
+ * Hace un display de un menu de navegacion, el cual se desglosa en varios mas, manejando asi el flow de la aplicacion.
+ */
 public class CLI {
     private UserManager userManager;
     private BookManager bookManager;
@@ -16,17 +20,24 @@ public class CLI {
     private Scanner scanner;
     private Lang lang;
 
+    /**
+     * Constructor encargado de inicializar el scanner y los manejadores de usuarios, libros y prestamos.
+     */
     public CLI() {
         this.userManager = new UserManager();
         this.bookManager = new BookManager();
         this.loanManager = new LoanManager(userManager, bookManager);
         this.scanner = new Scanner(System.in);
 
-        // test users, delete later
+        // Test users, delete after testing.
         userManager.registerUser("00000000", "test", "librariantest", 21, "librarian");
         userManager.registerUser("00000001", "test", "usertest", 21, "user");
     }
 
+    /**
+     * runApp es el metodo principal, el encargado de inicializar el programa.
+     * Empieza por pedirle al usuario elegir un idioma, para luego hacer log-in y continuar con la ejecucion del programa.
+     */
     public void runApp() {
         System.out.println("Select a Language:");
         System.out.println("1 - Español");
@@ -43,6 +54,9 @@ public class CLI {
             lang = new Esp();
         }
         
+        /**
+         * Loop principal para la iteracion con el usuario.
+         */
         while (true) {
             System.out.println(lang.getFirstWelcomeText());
             System.out.println(lang.getLogInRequestText());
@@ -51,6 +65,9 @@ public class CLI {
             System.out.print(lang.getPasswordRequestText());
             String password = scanner.nextLine();
 
+            /**
+             * Validacion de credenciales y display de menu user o librarian.
+             */
             if (userManager.validateCredentials(userId, password)) {
                 String userType = userManager.getUserType(userId);
 
@@ -65,6 +82,11 @@ public class CLI {
         }
     }
 
+    /**
+     * userMenu es el metodo encargado de manejar el menu con el cual un usuario tipo user puede interactuar.
+     * Recibe:
+     * @param userId Como el parametro para identificar el tipo de usario logged-in.
+     */
     private void userMenu(String userId) {
         while (true) {
             System.out.println(lang.getMainMenuText());
@@ -130,6 +152,10 @@ public class CLI {
         }
     }
 
+    /**
+     * librarianMenu es el metodo encargado de manejar el menu con el cual un usuario tipo librarian puede interactuar.
+     * @param userId Como el parametro para identificar el tipo de usario logged-in.
+     */
     private void librarianMenu(String userId) {
         while (true) {
             System.out.println(lang.getMainMenuText());

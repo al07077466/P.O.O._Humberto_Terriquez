@@ -1,7 +1,15 @@
 package edu.humberto.terriquez.actividades.proyecto_final.ui.Languages;
 
+/**
+ * Lang es la clase encargada de definir variables y getters, utilizadas en CLI.java y Esp.java & Eng.java.
+ * Utiliza el principio de polimorfismo por lo que el contenido de la variable, esta definido 2 veces,
+ * 1 en Esp.java y 1 en Eng.java. Esto con el fin de que al ser invocado en CLI.java, el usuario primero
+ * defina cual clase definira el texto dentro de cada variable.
+ */
 public class Lang { 
-    //CLI TRANSLATION
+    /**
+     * CLI TRANSLATION
+     */
     protected String FirstWelcomeText;
     protected String LogInRequestText;
     protected String UserRequestText;
@@ -52,6 +60,9 @@ public class Lang {
     protected String UserEqualsText;
     protected String BookEqualsText;
     
+    /**
+     * CLI TRANSLATION getters
+     */
     public String getFirstWelcomeText() {
         return FirstWelcomeText;
     }
@@ -248,25 +259,26 @@ public class Lang {
         return BookEqualsText;
     }
 
-    //Exceptions Translation
+    /**
+     * Exceptions Translation
+     */
     protected String NameCantBeNullExceptionText;
     protected String GenreCantBeNullExceptionText;
     protected String AuthorCantBeNullExceptionText;
     protected String StockCantBeNegativeExceptionText;
-
     protected String IDCantBeNullExceptionText;
     protected String IDMustBe8NumbersExceptionText;
     protected String PasswordCantBeNullExceptionText;
-    // ya existe como: protected String NameCantBeNullExceptionText;
     protected String NameCantContainNumbersExceptionText;
     protected String AgeCantBeNegativeExceptionText;
     protected String TypeMustBeUserOrLibrarianExceptionText;
     protected String ActiveLoanCantBeNegativeExceptionText;
     protected String PastLoanCantBeNegativeExceptionText;
-
-    // ya existe como: protected String IDCantBeNullExceptionText;
     protected String BookNameCantBeNullExceptionText;
 
+    /**
+     * Exceptions Translation Getters
+     */
     public String getNameCantBeNullExceptionText() {
         return NameCantBeNullExceptionText;
     }

@@ -1,5 +1,9 @@
 package edu.humberto.terriquez.actividades.proyecto_final.models;
 
+/**
+ * User es la clase encargada de definir los atributos para los usuarios de una libreria.
+ * Contiene los atributos id, password, name, age, type, activeLoan y pastLoan, incluyendo sus setters y sus getters.
+ */
 public class User {
     private String id;
     private String password;
@@ -9,6 +13,16 @@ public class User {
     private int activeLoan;
     private int pastLoan;
 
+    /**
+     * Constructor encargado de inicializar un usuario. Recibiendo:
+     * @param id
+     * @param password
+     * @param name
+     * @param age
+     * @param type
+     * @param activeLoan
+     * @param pastLoan
+     */
     public User(String id, String password, String name, int age, String type) {
         this.id = id;
         this.password = password;
@@ -19,6 +33,10 @@ public class User {
         this.pastLoan = 0;
     }
 
+    /**
+     * Getters y setters.
+     * Donde los setters, incluyen sus excepciones.
+     */
     public String getId() {
         return id;
     }

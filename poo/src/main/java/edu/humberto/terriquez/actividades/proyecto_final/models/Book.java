@@ -1,11 +1,22 @@
 package edu.humberto.terriquez.actividades.proyecto_final.models;
 
+/**
+ * Book es la clase encargada de definir los atributos de los libros para una libreria.
+ * Contiene los atributos name, genre, author y stock, incluyendo sus setters y sus getters.
+ */
 public class Book {
     private String name;
     private String genre;
     private String author;
     private int stock;
 
+    /**
+     * Constructor encargado de inicializar un libro. Recibiendo:
+     * @param name
+     * @param genre
+     * @param author
+     * @param stock
+     */
     public Book(String name, String genre, String author, int stock) {
         setName(name);
         setGenre(genre);
@@ -13,6 +24,11 @@ public class Book {
         setStock(stock);
     }
 
+
+    /**
+     * Getters y setters.
+     * Donde los setters, incluyen sus excepciones.
+     */
     public String getName() {
         return name;
     }

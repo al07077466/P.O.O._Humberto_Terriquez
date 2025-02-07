@@ -1,5 +1,9 @@
 package edu.humberto.terriquez.actividades.proyecto_final.ui.Languages;
 
+/**
+ * Eng es la clase encargada de definir como texto en ingles las variables creadas en Lang.java, utilizadas en CLI.java.
+ * Utiliza el principio de polimorfismo, por lo que esta clase es utilizada solo si el usuario lo elige.
+ */
 public class Eng extends Lang{
     public Eng(){
         FirstWelcomeText = "Welcome to the TeamTree Library!";
