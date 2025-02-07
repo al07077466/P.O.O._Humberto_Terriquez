@@ -145,16 +145,22 @@ public class CLI {
     
             switch (option) {
                 case 1:
-                    System.out.print(lang.getEnterBookNameText());
-                    String name = scanner.nextLine();
-                    System.out.print(lang.getEnterBookGenreText());
-                    String genre = scanner.nextLine();
-                    System.out.print(lang.getEnterBookAuthorText());
-                    String author = scanner.nextLine();
-                    System.out.print(lang.getEnterBookStockText());
-                    int stock = Integer.parseInt(scanner.nextLine());
-                    bookManager.registerBook(name, genre, author, stock);
-                    System.out.println(lang.getBoodAddedSuccessText());
+                    try {
+                        System.out.print(lang.getEnterBookNameText());
+                        String name = scanner.nextLine();
+                        System.out.print(lang.getEnterBookGenreText());
+                        String genre = scanner.nextLine();
+                        System.out.print(lang.getEnterBookAuthorText());
+                        String author = scanner.nextLine();
+                        System.out.print(lang.getEnterBookStockText());
+                        int stock = Integer.parseInt(scanner.nextLine());
+                        bookManager.registerBook(name, genre, author, stock);
+                        System.out.println(lang.getBookAddedSuccessText());
+                    } catch (NumberFormatException e) {
+                        System.out.println(lang.getErrorEqualsErrorText() + e.getMessage());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(lang.getErrorEqualsErrorText() + e.getMessage());
+                    }
                     break;
                 case 2:
                     System.out.print(lang.getEnterUserIDText());

@@ -16,7 +16,7 @@ public class Eng extends Lang{
         ChooseAnOptionText = "Select an option: ";
         OptionOneRequestBookText = "1 - Borrow a book";
         OptionTwoReturnBookText = "2 - Return a book";
-        EnterBookNameText = "Enter the book's name";
+        EnterBookNameText = "Enter the book's name: ";
         BookDontExistErrorText = "Error: The book does not exist";
         NotEnoughStockErrorText = "Error: No book copies available";
         MaxLoansReachedErrorText = "Error: Book loan limit reached (max. 2)";
@@ -34,7 +34,8 @@ public class Eng extends Lang{
         EnterBookGenreText = "Enter book's Genre: ";
         EnterBookAuthorText = "Enter book's Author: ";
         EnterBookStockText = "Enter book's Stock (# of copies): ";
-        BoodAddedSuccessText = "Book added successfully.";
+        BookAddedSuccessText = "Book added successfully.";
+        ErrorEqualsErrorText = "Error: ";
         EnterUserIDText = "User's ID: ";
         EnterUserPasswordText = "Password: ";
         EnterUserNameText = "Name: ";
@@ -50,5 +51,19 @@ public class Eng extends Lang{
         OptionThreeReturnToMainMenuText = "3 - Back to main menu";
         UserEqualsText = "User: ";
         BookEqualsText = " - Book: ";
+
+        NameCantBeNullExceptionText = "Name cannot be empty";
+        GenreCantBeNullExceptionText = "Genre cannot be empty";
+        AuthorCantBeNullExceptionText = "Author cannot be empty";
+        StockCantBeNegativeExceptionText = "Stock cannot be negative";
+        IDCantBeNullExceptionText = "ID cannot be empty";
+        IDMustBe8NumbersExceptionText = "ID must be exactly 8 numbers";
+        PasswordCantBeNullExceptionText = "Password cannot be empty";
+        NameCantContainNumbersExceptionText = "Name cannot contain numbers";
+        AgeCantBeNegativeExceptionText = "Age cannot be negative";
+        TypeMustBeUserOrLibrarianExceptionText = "Type must be 'user' or 'librarian'";
+        ActiveLoanCantBeNegativeExceptionText = "Active loans cannot be negative";
+        PastLoanCantBeNegativeExceptionText = "Past loans cannot be negative";
+        BookNameCantBeNullExceptionText = "Book name cannot be empty";
     }
 }

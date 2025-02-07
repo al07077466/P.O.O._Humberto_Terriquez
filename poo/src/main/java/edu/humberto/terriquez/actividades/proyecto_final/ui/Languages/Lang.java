@@ -34,7 +34,8 @@ public class Lang {
     protected String EnterBookGenreText;
     protected String EnterBookAuthorText;
     protected String EnterBookStockText;
-    protected String BoodAddedSuccessText;
+    protected String BookAddedSuccessText;
+    protected String ErrorEqualsErrorText;
     protected String EnterUserIDText;
     protected String EnterUserPasswordText;
     protected String EnterUserNameText;
@@ -179,8 +180,12 @@ public class Lang {
         return EnterBookStockText;
     }
 
-    public String getBoodAddedSuccessText() {
-        return BoodAddedSuccessText;
+    public String getBookAddedSuccessText() {
+        return BookAddedSuccessText;
+    }
+
+    public String getErrorEqualsErrorText() {
+        return ErrorEqualsErrorText;
     }
 
     public String getEnterUserIDText() {
@@ -241,5 +246,76 @@ public class Lang {
 
     public String getBookEqualsText() {
         return BookEqualsText;
+    }
+
+    //Exceptions Translation
+    protected String NameCantBeNullExceptionText;
+    protected String GenreCantBeNullExceptionText;
+    protected String AuthorCantBeNullExceptionText;
+    protected String StockCantBeNegativeExceptionText;
+
+    protected String IDCantBeNullExceptionText;
+    protected String IDMustBe8NumbersExceptionText;
+    protected String PasswordCantBeNullExceptionText;
+    // ya existe como: protected String NameCantBeNullExceptionText;
+    protected String NameCantContainNumbersExceptionText;
+    protected String AgeCantBeNegativeExceptionText;
+    protected String TypeMustBeUserOrLibrarianExceptionText;
+    protected String ActiveLoanCantBeNegativeExceptionText;
+    protected String PastLoanCantBeNegativeExceptionText;
+
+    // ya existe como: protected String IDCantBeNullExceptionText;
+    protected String BookNameCantBeNullExceptionText;
+
+    public String getNameCantBeNullExceptionText() {
+        return NameCantBeNullExceptionText;
+    }
+    
+    public String getGenreCantBeNullExceptionText() {
+        return GenreCantBeNullExceptionText;
+    }
+    
+    public String getAuthorCantBeNullExceptionText() {
+        return AuthorCantBeNullExceptionText;
+    }
+    
+    public String getStockCantBeNegativeExceptionText() {
+        return StockCantBeNegativeExceptionText;
+    }
+    
+    public String getIDCantBeNullExceptionText() {
+        return IDCantBeNullExceptionText;
+    }
+    
+    public String getIDMustBe8NumbersExceptionText() {
+        return IDMustBe8NumbersExceptionText;
+    }
+    
+    public String getPasswordCantBeNullExceptionText() {
+        return PasswordCantBeNullExceptionText;
+    }
+    
+    public String getNameCantContainNumbersExceptionText() {
+        return NameCantContainNumbersExceptionText;
+    }
+    
+    public String getAgeCantBeNegativeExceptionText() {
+        return AgeCantBeNegativeExceptionText;
+    }
+    
+    public String getTypeMustBeUserOrLibrarianExceptionText() {
+        return TypeMustBeUserOrLibrarianExceptionText;
+    }
+    
+    public String getActiveLoanCantBeNegativeExceptionText() {
+        return ActiveLoanCantBeNegativeExceptionText;
+    }
+    
+    public String getPastLoanCantBeNegativeExceptionText() {
+        return PastLoanCantBeNegativeExceptionText;
+    }
+    
+    public String getBookNameCantBeNullExceptionText() {
+        return BookNameCantBeNullExceptionText;
     }
 }

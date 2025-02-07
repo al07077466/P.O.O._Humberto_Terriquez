@@ -34,7 +34,8 @@ public class Esp extends Lang{
         EnterBookGenreText = "Ingresa el género: ";
         EnterBookAuthorText = "Ingresa el autor: ";
         EnterBookStockText = "Ingresa el stock: ";
-        BoodAddedSuccessText = "Libro registrado exitosamente.";
+        BookAddedSuccessText = "Libro registrado exitosamente.";
+        ErrorEqualsErrorText = "Error: ";
         EnterUserIDText = "ID del usuario: ";
         EnterUserPasswordText = "Contraseña: ";
         EnterUserNameText = "Nombre: ";
@@ -50,5 +51,23 @@ public class Esp extends Lang{
         OptionThreeReturnToMainMenuText = "3 - Regresar al menú principal";
         UserEqualsText = "Usuario: ";
         BookEqualsText = " - Libro: ";
+
+        NameCantBeNullExceptionText = "Nombre no puede estar vacío";
+        GenreCantBeNullExceptionText = "Género no puede estar vacío";
+        AuthorCantBeNullExceptionText = "Autor no puede estar vacío";
+        StockCantBeNegativeExceptionText = "Stock no puede ser negativo";
+
+        IDCantBeNullExceptionText = "ID no puede estar vacío";
+        IDMustBe8NumbersExceptionText = "ID debe tener 8 números exactamente";
+        PasswordCantBeNullExceptionText = "Contraseña no puede ser vacía";
+        // ya existe como: protected String NameCantBeNullExceptionText;
+        NameCantContainNumbersExceptionText = "Nombre no puede contener números";
+        AgeCantBeNegativeExceptionText = "Edad no puede ser negativa";
+        TypeMustBeUserOrLibrarianExceptionText = "Tipo debe ser 'user' o 'librarian'";
+        ActiveLoanCantBeNegativeExceptionText = "Préstamos activos no pueden ser negativos";
+        PastLoanCantBeNegativeExceptionText = "Préstamos pasados no pueden ser negativos";
+
+        // ya existe como: protected String IDCantBeNullExceptionText;
+        BookNameCantBeNullExceptionText = "Nombre del libro no puede estar vacío";
     }
 }

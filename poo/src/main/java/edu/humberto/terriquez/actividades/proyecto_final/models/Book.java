@@ -7,10 +7,10 @@ public class Book {
     private int stock;
 
     public Book(String name, String genre, String author, int stock) {
-        this.name = name;
-        this.genre = genre;
-        this.author = author;
-        this.stock = stock;
+        setName(name);
+        setGenre(genre);
+        setAuthor(author);
+        setStock(stock);
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class Book {
 
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Nombre no puede ser vacío");
+            throw new IllegalArgumentException("Nombre no puede estar vacío");
         }
         this.name = name;
     }
@@ -30,7 +30,7 @@ public class Book {
 
     public void setGenre(String genre) {
         if (genre == null || genre.isEmpty()) {
-            throw new IllegalArgumentException("Género no puede ser vacío");
+            throw new IllegalArgumentException("Género no puede estar vacío");
         }
         this.genre = genre;
     }
@@ -41,7 +41,7 @@ public class Book {
 
     public void setAuthor(String author) {
         if (author == null || author.isEmpty()) {
-            throw new IllegalArgumentException("Autor no puede ser vacío");
+            throw new IllegalArgumentException("Autor no puede estar vacío");
         }
         this.author = author;
     }
