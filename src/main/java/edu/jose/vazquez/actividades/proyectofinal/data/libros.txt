@@ -1,0 +1,12 @@
+La sombra del viento,Carlos Ruiz Zafón,132,false,1937,Fantasia,1
+El nombre del viento,Patrick Rothfuss,133,false,1937,Fantasia,1
+Juego de tronos,George R. Martin,123,true,1937,Fantasia,3
+La ladrona de libros,Markus Zusak,134,false,1937,Fantasia,1
+El señor de los anillos,J.R.R. Tolkien,124,false,1937,Fantasia,1
+Harry Potter,J.K. Rowling,125,false,1937,Fantasia,1
+El principito,Antoine de Saint-Exupéry,126,true,1937,Fantasia,2
+Cien años de soledad,Gabriel García Márquez,127,true,1937,Fantasia,0
+Don Quijote de la Mancha,Miguel de Cervantes,128,false,1937,Fantasia,1
+El alquimista,Paulo Coelho,129,true,1937,Fantasia,1
+El código Da Vinci,Dan Brown,130,false,1937,Fantasia,1
+El perfume,Patrick Süskind,131,true,1937,Fantasia,1
