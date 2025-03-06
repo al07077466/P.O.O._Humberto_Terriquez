@@ -1,0 +1,9 @@
+laura,123,0,Laura Hernandez,Usuario VIP,4,0
+carlos,123,7,Carlos Sanchez,Usuario JR,0,0
+luis,123,18,Luis Rodriguez,Usuario adulto,0,0
+pedro,123,0,Pedro Martinez,Usuario VIP,2,0
+ana,123,30,Ana Garcia,Usuario adulto,0,0
+jose,123,25,Jose Vazquez,Usuario adulto,1,0
+admin,admin,0,admin,Usuario VIP,0,0
+juan,123,15,Juan Perez,Usuario teens,0,0
+maria,123,10,Maria Lopez,Usuario JR,0,0
